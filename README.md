@@ -1,2 +1,1 @@
-# armbian-repkapi
-Armbian for RepkaPi
+# Armbian for RepkaPi
