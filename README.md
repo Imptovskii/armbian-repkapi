@@ -18,6 +18,7 @@ cd build
 ```
 
 Затем ищем в списке repkapi3 и задаем параметры которые нам нужны.
+Ядро Current или Old Stable, с рабочим столом или без и т.д.
 
 ### Копируем DTB в /boot img образа.
 
@@ -34,12 +35,6 @@ sudo mount -o loop /dev/mapper/loop<цифра>p1 /mnt/img/
 sudo cp /path/to/build/armbian-repkapi/cache/sources/u-boot/v2022.07-repka/arch/arm/dts/sun50i-h5-repka-pi3.dtb /mnt/img/boot/dtb-5.15.93-sunxi64/allwinner/
 sudo umount /mnt/img
 ```
-
-<a href="#how-to-build-an-image-or-a-kernel"><img src=".github/README.gif" alt="Armbian logo" width="100%"></a>
-
-- Interactive graphical interface.
-- The workspace will be prepared by installing the necessary dependencies and sources.
-- It guides the entire process until a kernel package or ready-to-use image of the SD card is created.
 
 ### Build parameter examples
 
