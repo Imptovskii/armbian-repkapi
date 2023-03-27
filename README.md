@@ -57,9 +57,9 @@ cd build
 Install DTB For RepkaPi3
 
 ```
-sudo kpartx -av ~/armbian-repkapi/output/images/Armbian_23.02.2_Repkapi3_bullseye_current_5.15.93.img
+sudo kpartx -av /path/to/images/armbian-repkapi/output/images/Armbian_23.02.2_Repkapi3_bullseye_current_5.15.93.img
 sudo mount -o loop /dev/mapper/loop*p1 /mnt/img/
-sudo cp ~/armbian-repkapi/cache/sources/u-boot/v2022.07-repka/arch/arm/dts/sun50i-h5-repka-pi3.dtb /mnt/img/boot/dtb-5.15.93-sunxi64/allwinner/
+sudo cp /path/to/images/armbian-repkapi/cache/sources/u-boot/v2022.07-repka/arch/arm/dts/sun50i-h5-repka-pi3.dtb /mnt/img/boot/dtb-5.15.93-sunxi64/allwinner/
 sudo umount /mnt/img
 ```
 
