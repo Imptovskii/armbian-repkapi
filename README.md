@@ -47,11 +47,20 @@
 
 ### Simply start with the build script
 
-```bash
+```
 apt-get -y install git
 git clone --depth=1 --branch=master https://github.com/armbian/build
 cd build
 ./compile.sh
+```
+
+Install DTB For RepkaPi3
+
+```
+sudo kpartx -av ~/armbian-repkapi/output/images/Armbian_23.02.2_Repkapi3_bullseye_current_5.15.93.img
+sudo mount -o loop /dev/mapper/loop*p1 /mnt/img/
+sudo cp ~/armbian-repkapi/cache/sources/u-boot/v2022.07-repka/arch/arm/dts/sun50i-h5-repka-pi3.dtb /mnt/img/boot/dtb-5.15.93-sunxi64/allwinner/
+sudo umount /mnt/img
 ```
 
 <a href="#how-to-build-an-image-or-a-kernel"><img src=".github/README.gif" alt="Armbian logo" width="100%"></a>
