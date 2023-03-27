@@ -1,65 +1,37 @@
-<p align="center">
-  <a href="#build-framework">
-  <img src=".github/armbian-logo.png" alt="Armbian logo" width="144">
-  </a><br>
-  <strong>Armbian Linux Build Framework</strong><br>
-<br>
-<a href=https://github.com/armbian/build/actions/workflows/build-train.yml><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/armbian/build/build-train.yml?logo=githubactions&label=Kernel%20compile&logoColor=white&style=for-the-badge&branch=master"></a>
-<a href=https://github.com/armbian/build/actions/workflows/build-all-desktops.yml><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/armbian/build/build-all-desktops.yml?logo=githubactions&logoColor=white&label=Images%20assembly&style=for-the-badge&branch=master"></a>
-<a href=https://github.com/armbian/build/actions/workflows/smoke-tests.yml><img alt="Smoke test success ratio" src="https://img.shields.io/badge/dynamic/json?logo=speedtest&label=Smoke%20tests%20success&query=SMOKE&color=44cc11&cacheSeconds=600&style=for-the-badge&url=https%3A%2F%2Fgithub.com%2Farmbian%2Fscripts%2Freleases%2Fdownload%2Fstatus%2Frunners_capacity.json"></a>
- <br>
+# Armbian for RepkaPi
+Небольшой проект по портированию Armbian. В данный момент проект находит в активной стадии разработки.
+Первые рабочие билды уже лежат в релизах. Есть небольшие шараховатости но уже все более или менее работает.
 
-<br>
-<a href=https://fosstodon.org/@armbian><img alt="Mastodon Follow" src="https://img.shields.io/mastodon/follow/109365956768424870?domain=https%3A%2F%2Ffosstodon.org&logo=mastodon&style=flat-square"></a>
-<a href=http://discord.armbian.com/><img alt="Discord" src="https://img.shields.io/discord/854735915313659944?label=Discord&logo=discord&style=flat-square"></a>
-<a href=https://liberapay.com/armbian><img alt="Liberapay patrons" src="https://img.shields.io/liberapay/patrons/armbian?logo=liberapay&style=flat-square"></a>
-</p>
+### для сборки подтребуется:
 
+- Ubuntu 22.04 Server
+- От 4 потоков (начиная с семейства Sandy/Ivy Bridge) для более или менее быстрой сборки
+- От 2 ГБ ОЗУ
 
-
-## Table of contents
-
-- [What this project does?](#what-this-project-does)
-- [Getting started](#getting-started)
-- [Compare with industry standards](#compare-with-industry-standards)
-- [Download prebuilt images](#download-prebuilt-images)
-- [Project structure](#project-structure)
-- [Contribution](#contribution)
-- [Support](#support)
-- [Contact](#contact)
-- [Contributors](#contributors)
-- [Sponsors](#sponsors)
-- [License](#license)
-
-## What this project does?
-
-- Builds custom kernel, image or a distribution optimized for low resource HW such as single board computers,
-- Include filesystem generation, low-level control software, kernel image and bootloader compilation,
-- Provides a consistent user experience by keeping system standards across different platforms.
-
-## Getting started
-
-### Basic requirements
-
-- x86_64 or aarch64 machine with at least 2GB of memory and ~35GB of disk space for a virtual machine, container or bare metal installation
-- Ubuntu Jammy 22.04.x amd64 or aarch64 for native building or any [Docker](https://docs.armbian.com/Developer-Guide_Building-with-Docker/) capable amd64 / aarch64 Linux for containerised
-- Superuser rights (configured sudo or root access).
-
-### Simply start with the build script
+### Как собрать Armbian?
 
 ```
 apt-get -y install git
-git clone --depth=1 --branch=master https://github.com/armbian/build
+git clone --branch=main https://github.com/armbian/build
 cd build
 ./compile.sh
 ```
 
-Install DTB For RepkaPi3
+Затем ищем в списке repkapi3 и задаем параметры которые нам нужны.
+
+### Копируем DTB в /boot img образа.
+
+/path/to/build/ - это путь до папки со сборщиком
 
 ```
-sudo kpartx -av /path/to/images/armbian-repkapi/output/images/Armbian_23.02.2_Repkapi3_bullseye_current_5.15.93.img
-sudo mount -o loop /dev/mapper/loop*p1 /mnt/img/
-sudo cp /path/to/images/armbian-repkapi/cache/sources/u-boot/v2022.07-repka/arch/arm/dts/sun50i-h5-repka-pi3.dtb /mnt/img/boot/dtb-5.15.93-sunxi64/allwinner/
+sudo kpartx -av /path/to/build/armbian-repkapi/output/images/<Образ>.img
+```
+
+Затем вам программа kpartx выстаст название устройства напимер /dev/loop1p1. Только у вас будет уже своя цифра (/dev/loop1p1, /dev/loop2p1 и т.д.).
+
+```
+sudo mount -o loop /dev/mapper/loop<цифра>p1 /mnt/img/
+sudo cp /path/to/build/armbian-repkapi/cache/sources/u-boot/v2022.07-repka/arch/arm/dts/sun50i-h5-repka-pi3.dtb /mnt/img/boot/dtb-5.15.93-sunxi64/allwinner/
 sudo umount /mnt/img
 ```
 
@@ -75,12 +47,6 @@ Show work in progress areas in interactive mode:
 
 ```bash
 ./compile.sh EXPERT="yes"
-```
-
-Run build framework inside Docker container:
-
-```bash
-./compile.sh docker
 ```
 
 Build minimal CLI Armbian Focal image for Orangepi Zero. Use modern kernel and write image to the SD card:
