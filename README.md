@@ -1,6 +1,21 @@
 # Armbian for RepkaPi
+![image](https://user-images.githubusercontent.com/82046704/227979186-eb12d202-1f76-4736-8dc0-585b6bff3d8e.png)
+
 Небольшой проект по портированию Armbian. В данный момент проект находит в активной стадии разработки.
 Первые рабочие билды уже лежат в релизах. Есть небольшие шараховатости но уже все более или менее работает.
+
+## Что такое RepkaPi:
+![image](https://user-images.githubusercontent.com/82046704/227980711-b0c4c54a-b631-4dd9-9beb-1ae1a1479b01.png)
+
+Это одноплатный компьютер на ARM от Российского вендора НПО "RBS". В данный момент доступна модель RepkaPi 3.
+Характеристики RepkaPi 3:
+- SoC: Allwinner H5
+- Ядра: Cortex-A53
+- Видеоядро: Mali-450MP4
+- ОЗУ: 1ГБ или 2ГБ
+- Wi-Fi 802.11b/g/n Bluetooth V4.0 (HS) На модуле AP6212
+- Ethernet 100Mb
+- GPIO 40 Pin
 
 ## Для сборки потребуется:
 
