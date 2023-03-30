@@ -1,0 +1,17 @@
+# ReARM.it hardware optimization service
+# Apply optimisations
+
+[Unit]
+Description=ReARM.it set hdmi audio
+Before=basic.target
+After=sysinit.target local-fs.target armbian-hardware-monitor.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/rearmit/rearmit-hdmi-audio start
+TimeoutStartSec=2min
+
+[Install]
+WantedBy=basic.target

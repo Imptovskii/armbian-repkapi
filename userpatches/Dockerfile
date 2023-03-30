@@ -53,7 +53,6 @@ RUN apt-get update \
        flex \
        gawk \
        gcc-aarch64-linux-gnu \
-       gcc-riscv64-linux-gnu \
        gcc-arm-linux-gnueabihf \
        gcc-arm-linux-gnueabi \
        gcc-arm-none-eabi \
